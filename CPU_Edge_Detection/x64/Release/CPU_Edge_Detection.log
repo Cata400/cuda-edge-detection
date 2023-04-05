@@ -1,0 +1,2 @@
+﻿CPU_Edge_Detection.obj : error LNK2001: unresolved external symbol "int __cdecl cv::_interlockedExchangeAdd(int *,int)" (?_interlockedExchangeAdd@cv@@YAHPEAHH@Z)
+C:\Users\Catalin\Desktop\cuda-edge-detection\CPU_Edge_Detection\x64\Release\CPU_Edge_Detection.exe : fatal error LNK1120: 1 unresolved externals
