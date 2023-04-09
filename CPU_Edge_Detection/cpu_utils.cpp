@@ -1,14 +1,32 @@
 #include "cpu_utils.h"
 
-Mat edge_detect_opencv(Mat image) {
+Mat edge_detect_opencv(Mat input) {
 	Mat grad_x, grad_y;
-	Sobel(image, grad_x, CV_32F, 1, 0, 3, 1, 0, BORDER_CONSTANT);
-	Sobel(image, grad_y, CV_32F, 0, 1, 3, 1, 0, BORDER_CONSTANT);
+	Sobel(input, grad_x, CV_32F, 1, 0, 3, 1, 0, BORDER_CONSTANT);
+	Sobel(input, grad_y, CV_32F, 0, 1, 3, 1, 0, BORDER_CONSTANT);
 
 	Mat grad;
 	pow(grad_x, 2, grad_x);
 	pow(grad_y, 2, grad_y);
 	sqrt(grad_x + grad_y, grad);
+
+	return grad;
+}
+
+cuda::GpuMat edge_detect_opencv_gpu(cuda::GpuMat input) {
+	cuda::GpuMat grad_x, grad_y;
+
+	Ptr<cuda::Filter> sobel_x = cuda::createSobelFilter(input.type(), CV_32F, 1, 0, 3, 1, BORDER_CONSTANT, BORDER_CONSTANT);
+	Ptr<cuda::Filter> sobel_y = cuda::createSobelFilter(input.type(), CV_32F, 0, 1, 3, 1, BORDER_CONSTANT, BORDER_CONSTANT);
+
+	sobel_x->apply(input, grad_x);
+	sobel_y->apply(input, grad_y);
+
+	cuda::GpuMat grad;
+	cuda::pow(grad_x, 2, grad_x);
+	cuda::pow(grad_y, 2, grad_y);
+	cuda::add(grad_x, grad_y, grad);
+	cuda::sqrt(grad, grad);
 
 	return grad;
 }
@@ -63,4 +81,5 @@ void edge_detect_classic(uchar** input, int height, int width, float** output) {
 	delete[] gx;
 	delete[] gy;
 }
+
 

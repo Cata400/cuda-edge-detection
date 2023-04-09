@@ -3,8 +3,9 @@
 #include <opencv2/core/core.hpp>
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/imgproc.hpp>
+#include <opencv2/cudaarithm.hpp>
+#include <opencv2/cudaimgproc.hpp>
 #include <ctime>
-#include <iomanip>
 
 #include "cpu_utils.h"
 
@@ -37,11 +38,31 @@ int main()
         clock_t start = clock();
         edges_opencv = edge_detect_opencv(image);
         clock_t end = clock();
-        double elapsed_time = double(end - start) / CLOCKS_PER_SEC * 1000;
-        std::cout << "OpenCV edge detection took " << std::setprecision(8) << elapsed_time << " ms" << std::endl;
+        double elapsed_time = double(end - start) / CLOCKS_PER_SEC;
+        std::cout << "OpenCV edge detection took " << elapsed_time << " seconds" << std::endl << std::endl;
 
         imwrite(save_path_opencv, edges_opencv);
     }
+
+    // OpenCV GPU edge detection
+    {
+        cuda::GpuMat image_gpu, edges_opencv_gpu;
+        Mat edges_opencv_gpu_recovered;
+        image_gpu.upload(image);
+
+		clock_t start = clock();
+		edges_opencv_gpu = edge_detect_opencv_gpu(image_gpu);
+		clock_t end = clock();
+		double elapsed_time = double(end - start) / CLOCKS_PER_SEC;
+		std::cout << "OpenCV CUDA edge detection took " << elapsed_time << " seconds" << std::endl; // To Do: check why MAE is so high
+
+        edges_opencv_gpu.download(edges_opencv_gpu_recovered);
+		imwrite(save_path_opencv_gpu, edges_opencv_gpu_recovered);
+
+        Mat edges_opencv = edge_detect_opencv(image);
+        Mat diff = abs(edges_opencv_gpu_recovered - edges_opencv);
+        std::cout << "MAE between OpenCV and OpenCV CUDA: " << cv::sum(diff)[0] / (diff.rows * diff.cols) << std::endl << std::endl;
+	}
 
     // Classic edge detection
     {
@@ -64,17 +85,21 @@ int main()
         clock_t start = clock();
         edge_detect_classic(image_data_2d, height, width, image_edges_2d);
         clock_t end = clock();
-        double elapsed_time = double(end - start) / CLOCKS_PER_SEC * 1000;
-        std::cout << "Classic edge detection took " << std::setprecision(8) << elapsed_time << " ms" << std::endl;
+        double elapsed_time = double(end - start) / CLOCKS_PER_SEC;
+        std::cout << "Classic edge detection took " << elapsed_time << " seconds" << std::endl;
 
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
                 image_edges[i * width + j] = image_edges_2d[i][j];
 			}
 		}
-        Mat edges_classic = Mat(height, width, CV_32FC1, image_edges);
 
+        Mat edges_classic = Mat(height, width, CV_32FC1, image_edges);
         imwrite(save_path_classic, edges_classic);
+
+        Mat edges_opencv = edge_detect_opencv(image);
+        Mat diff = abs(edges_classic - edges_opencv);
+        std::cout << "MAE between OpenCV and classic edge detection: " << cv::sum(diff)[0] / (diff.rows * diff.cols) << std::endl;
 
         for (int i = 0; i < height; i++) {
 			delete[] image_edges_2d[i];

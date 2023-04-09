@@ -71,8 +71,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>C:\opencv\build\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\opencv\build\x64\vc15\lib;$(ProjectDir)lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\opencv_gpu\install\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\opencv_gpu\install\x64\vc17\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <IncludePath>..\opencv\build\include</IncludePath>
@@ -134,8 +134,8 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>opencv_world460.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:\opencv\build\x64\vc15\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opencv_aruco460.lib;opencv_barcode460.lib;opencv_bgsegm460.lib;opencv_bioinspired460.lib;opencv_calib3d460.lib;opencv_ccalib460.lib;opencv_core460.lib;opencv_cudaarithm460.lib;opencv_cudabgsegm460.lib;opencv_cudacodec460.lib;opencv_cudafeatures2d460.lib;opencv_cudafilters460.lib;opencv_cudaimgproc460.lib;opencv_cudalegacy460.lib;opencv_cudaobjdetect460.lib;opencv_cudaoptflow460.lib;opencv_cudastereo460.lib;opencv_cudawarping460.lib;opencv_cudev460.lib;opencv_datasets460.lib;opencv_dnn460.lib;opencv_dnn_objdetect460.lib;opencv_dnn_superres460.lib;opencv_dpm460.lib;opencv_face460.lib;opencv_features2d460.lib;opencv_flann460.lib;opencv_fuzzy460.lib;opencv_gapi460.lib;opencv_hfs460.lib;opencv_highgui460.lib;opencv_imgcodecs460.lib;opencv_imgproc460.lib;opencv_img_hash460.lib;opencv_intensity_transform460.lib;opencv_line_descriptor460.lib;opencv_mcc460.lib;opencv_ml460.lib;opencv_objdetect460.lib;opencv_optflow460.lib;opencv_phase_unwrapping460.lib;opencv_photo460.lib;opencv_plot460.lib;opencv_quality460.lib;opencv_rapid460.lib;opencv_reg460.lib;opencv_rgbd460.lib;opencv_saliency460.lib;opencv_shape460.lib;opencv_stereo460.lib;opencv_stitching460.lib;opencv_structured_light460.lib;opencv_superres460.lib;opencv_surface_matching460.lib;opencv_text460.lib;opencv_tracking460.lib;opencv_video460.lib;opencv_videoio460.lib;opencv_videostab460.lib;opencv_wechat_qrcode460.lib;opencv_xfeatures2d460.lib;opencv_ximgproc460.lib;opencv_xobjdetect460.lib;opencv_xphoto460.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\opencv_gpu\install\x64\vc17\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
