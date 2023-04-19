@@ -14,8 +14,11 @@ using namespace cv;
 
 
 __global__ void edge_detect_cuda(uchar* input, float* output, int height, int width) {
-    int i = threadIdx.x + blockIdx.x * blockDim.x;
-    int j = threadIdx.y + blockIdx.y * blockDim.y;
+    //int i = threadIdx.x + blockIdx.x * blockDim.x;
+    //int j = threadIdx.y + blockIdx.y * blockDim.y;
+    
+    int i = blockIdx.x;
+    int j = threadIdx.x;
 
     if (i > 0 && i < height - 1 && j > 0 && j < width - 1) {
         float gx = input[(i - 1) * width + (j - 1)] + 2 * input[i * width + (j - 1)] + input[(i + 1) * width + (j - 1)] - input[(i - 1) * width + (j + 1)] - 2 * input[i * width + (j + 1)] - input[(i + 1) * width + (j + 1)];
@@ -114,7 +117,7 @@ int main()
         goto Error;
     }
     
-    /*
+    
     // Copy output vector from GPU buffer to host memory.
     cudaStatus = cudaMemcpy(image_edges_2d[0], image_edges_2d_cuda, height * width * sizeof(float), cudaMemcpyDeviceToHost);
     if (cudaStatus != cudaSuccess) {
@@ -122,9 +125,11 @@ int main()
         goto Error;
     }
 
-    Mat edges_cuda = Mat(height, width, CV_8UC1, image_edges_2d[0]);
+    /*
+    Mat edges_cuda = Mat(height, width, CV_32F, image_edges_2d[0]);
     imwrite(save_path_cuda, edges_cuda);
 
+    /*
     // cudaDeviceReset must be called before exiting in order for profiling and
     // tracing tools such as Nsight and Visual Profiler to show complete traces.
     cudaStatus = cudaDeviceReset();
