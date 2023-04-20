@@ -54,32 +54,32 @@ void convolve(uchar** input, int height, int width, int kernel_size, float kerne
 
 void edge_detect_classic(uchar** input, int height, int width, float** output) {
 	const int kernel_size = 3;
-	float gx_kernel[kernel_size][kernel_size] = { { 1, 0, -1 }, { 2, 0, -2 }, { 1, 0, -1 } };
-	float gy_kernel[kernel_size][kernel_size] = { { 1, 2, 1 },  { 0, 0, 0 }, { -1, -2, -1 }};
+	float gx[kernel_size][kernel_size] = { { 1, 0, -1 }, { 2, 0, -2 }, { 1, 0, -1 } };
+	float gy[kernel_size][kernel_size] = { { 1, 2, 1 },  { 0, 0, 0 }, { -1, -2, -1 }};
 
-	float** gx = new float*[height];
-	float** gy = new float*[height];
+	float** grad_x = new float*[height];
+	float** grad_y = new float*[height];
 	for (int i = 0; i < height; i++) {
-		gx[i] = new float[width];
-		gy[i] = new float[width];
+		grad_x[i] = new float[width];
+		grad_y[i] = new float[width];
 	}
 
-	convolve(input, height, width, kernel_size, gx_kernel, gx);
-	convolve(input, height, width, kernel_size, gy_kernel, gy);
+	convolve(input, height, width, kernel_size, gx, grad_x);
+	convolve(input, height, width, kernel_size, gy, grad_y);
 
 	for (int i = 0; i < height; i++) {
 		for (int j = 0; j < width; j++) {
-			output[i][j] = sqrt(gx[i][j] * gx[i][j] + gy[i][j] * gy[i][j]);
+			output[i][j] = sqrt(grad_x[i][j] * grad_x[i][j] + grad_y[i][j] * grad_y[i][j]);
 		}
 	}
 
 	for (int i = 0; i < height; i++) {
-		delete[] gx[i];
-		delete[] gy[i];
+		delete[] grad_x[i];
+		delete[] grad_y[i];
 	}
 
-	delete[] gx;
-	delete[] gy;
+	delete[] grad_x;
+	delete[] grad_y;
 }
 
 
