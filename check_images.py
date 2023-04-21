@@ -2,7 +2,7 @@ from skimage import io
 import numpy as np
 import matplotlib.pyplot as plt
 
-image_name = "Lenna"
+image_name = "Lenna_multiplied_4x4"
 image_path = "Images/" + image_name + ".png"
 save_path_opencv = "Images/" + image_name + "_edge_opencv.png"
 save_path_opencv_gpu = "Images/" + image_name + "_edge_opencv_gpu.png"

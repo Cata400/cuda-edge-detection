@@ -15,9 +15,17 @@ __constant__ float gx[3][3] = { { 1, 0, -1 }, { 2, 0, -2 }, { 1, 0, -1 } };
 __constant__ float gy[3][3] = { { 1, 2, 1 },  { 0, 0, 0 }, { -1, -2, -1 } };
 
 
-__global__ void edge_detect_cuda_pixel(uchar* input, float* output, int height, int width) {
-    int i = blockIdx.x;
-    int j = threadIdx.x;
+__global__ void edge_detect_cuda(uchar* input, float* output, int height, int width, bool pixel) {
+    int i, j;
+
+    if (pixel) {
+        i = blockIdx.x;
+        j = threadIdx.x;
+    }
+    else {
+        i = blockIdx.x * blockDim.x + threadIdx.x;
+        j = blockIdx.y * blockDim.y + threadIdx.y;
+    }
 
     float grad_x = 0, grad_y = 0;
 
@@ -36,54 +44,17 @@ __global__ void edge_detect_cuda_pixel(uchar* input, float* output, int height, 
 }
 
 
-__global__ void edge_detect_cuda_block(uchar* input, float* output, int height, int width) {
-    int i = blockIdx.x * blockDim.x + threadIdx.x;
-    int j = blockIdx.y * blockDim.y + threadIdx.y;
-
-    float grad_x = 0, grad_y = 0;
-
-    if (i > 0 && i < height - 1 && j > 0 && j < width - 1) {
-        for (int k = -1; k < 2; k++) {
-            for (int l = -1; l < 2; l++) {
-                grad_x += input[(i + k) * width + (j + l)] * gx[k + 1][l + 1];
-                grad_y += input[(i + k) * width + (j + l)] * gy[k + 1][l + 1];
-            }
-        }
-        output[i * width + j] = sqrt(grad_x * grad_x + grad_y * grad_y);
-    }
-    else {
-        output[i * width + j] = 0;
-    }
-}
-
-
 int main()
 {
-    std::string image_name = "Lenna";
+    // Parameters
+    std::string image_name = "Lenna_multiplied_4x4";
     std::string image_path = "../Images/" + image_name + ".png";
     std::string save_path_cuda = "../Images/" + image_name + "_edge_cuda.png";
-    int reps = 1000;
-    bool pixel = true;
+    int reps = 100;
+    bool pixel = false;
 
     // Read image
     Mat image = imread(image_path, IMREAD_COLOR);
-
-    int height = image.rows;
-    int width = image.cols;
-
-    int block_size_x = 32;
-    int block_size_y = 32;
-    dim3 block_size(block_size_x, block_size_y);
-
-    int grid_size_x = (height + block_size_x - 1) / block_size_x;
-    int grid_size_y = (width + block_size_y - 1) / block_size_y;
-    dim3 grid_size(grid_size_x, grid_size_y);
-
-    uchar* image_data = image.data;
-    float* image_edges = new float[height * width];
-    Mat edges_cuda;
-
-    cudaError_t cudaStatus;
 
     if (!image.data) {
         std::cout << "Could not open or find the image" << std::endl;
@@ -95,13 +66,37 @@ int main()
 
     cvtColor(image, image, COLOR_BGR2GRAY);
 
+    // Allocate arrays and dimensions
+    int height = image.rows;
+    int width = image.cols;
+
+    int block_size_x = 8;
+    int block_size_y = 8;
+    dim3 block_size(block_size_x, block_size_y);
+
+    int grid_size_x = (height + block_size_x - 1) / block_size_x;
+    int grid_size_y = (width + block_size_y - 1) / block_size_y;
+    dim3 grid_size(grid_size_x, grid_size_y);
+
+    uchar* image_data = new uchar[height * width];
+    int index = 0;
+    for (int i = 0; i < height; i++) {
+        for (int j = 0; j < width; j++) {
+            image_data[index++] = image.at<uchar>(i, j);
+        }
+    }
+
+    float* image_edges = new float[height * width];
+    Mat edges_cuda;
+
+    cudaError_t cudaStatus;
+
     // Choose which GPU to run on, change this on a multi-GPU system
     cudaStatus = cudaSetDevice(0);
     if (cudaStatus != cudaSuccess) {
         fprintf(stderr, "cudaSetDevice failed!");
         goto Error;
     }
-
 
     // Allocate GPU buffers for input and output image
     uchar* image_data_cuda;
@@ -112,7 +107,6 @@ int main()
         fprintf(stderr, "cudaMalloc failed!");
         goto Error;
     }
-
 
     cudaStatus = cudaMalloc((void**)&image_edges_cuda, height * width * sizeof(float));
     if (cudaStatus != cudaSuccess) {
@@ -126,8 +120,7 @@ int main()
         fprintf(stderr, "cudaMemcpy failed!");
         goto Error;
     }
-
-
+    
     // Launch a kernel on the GPU with one thread for each pixel
     cudaEvent_t start, stop;
     cudaEventCreate(&start);
@@ -136,12 +129,11 @@ int main()
 
     for (int i = 0; i < reps; i++) {
         if (pixel) {
-            edge_detect_cuda_pixel <<< height, width >>> (image_data_cuda, image_edges_cuda, height, width);
+            edge_detect_cuda <<< height, width >>> (image_data_cuda, image_edges_cuda, height, width, pixel);
         }
         else {
-			edge_detect_cuda_block <<< grid_size, block_size >>> (image_data_cuda, image_edges_cuda, height, width);
-		}
-
+            edge_detect_cuda <<< grid_size, block_size >>> (image_data_cuda, image_edges_cuda, height, width, pixel);
+        }
 
         // Check for any errors launching the kernel
         cudaStatus = cudaGetLastError();
@@ -171,7 +163,8 @@ int main()
         fprintf(stderr, "cudaMemcpy failed!");
         goto Error;
     }
-
+    
+    // Save image
     edges_cuda = Mat(height, width, CV_32FC1, image_edges);
     Rect roi(1, 1, width - 2, height - 2);
     edges_cuda = edges_cuda(roi);
@@ -187,7 +180,8 @@ int main()
     }
 
     delete[] image_edges;
-
+    delete[] image_data;
+    
 
 Error:
     cudaFree(image_data_cuda);

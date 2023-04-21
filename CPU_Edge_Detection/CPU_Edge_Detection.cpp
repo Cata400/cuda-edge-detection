@@ -13,12 +13,13 @@ using namespace cv;
 
 int main()
 {
-    std::string image_name = "Lenna";
+    // Parameters
+    std::string image_name = "Lenna_multiplied_4x4";
     std::string image_path = "../Images/" + image_name + ".png";
     std::string save_path_opencv = "../Images/" + image_name + "_edge_opencv.png";
     std::string save_path_opencv_gpu = "../Images/" + image_name + "_edge_opencv_gpu.png";
     std::string save_path_classic = "../Images/" + image_name + "_edge_classic.png";
-    int reps = 1000;
+    int reps = 100;
 
     Mat image = imread(image_path, IMREAD_COLOR);
 
@@ -43,7 +44,7 @@ int main()
 
         auto end = std::chrono::high_resolution_clock::now();
         auto elapsed_time = end - start;
-        std::cout << "OpenCV edge detection took " << elapsed_time / std::chrono::milliseconds(1) / 1000.0 << " seconds" << std::endl << std::endl;
+        std::cout << "OpenCV edge detection took " << elapsed_time / std::chrono::milliseconds(1) << " ms" << std::endl << std::endl;
 
         Rect roi(1, 1, image.cols - 2, image.rows - 2);
         edges_opencv = edges_opencv(roi);
@@ -64,7 +65,7 @@ int main()
 
         auto end = std::chrono::high_resolution_clock::now();
         auto elapsed_time = end - start;
-        std::cout << "OpenCV edge detection took " << elapsed_time / std::chrono::milliseconds(1) / 1000.0 << " seconds" << std::endl << std::endl;
+        std::cout << "OpenCV edge detection took " << elapsed_time / std::chrono::milliseconds(1) << " ms" << std::endl << std::endl;
 
         edges_opencv_gpu.download(edges_opencv_gpu_recovered);
 
@@ -99,7 +100,7 @@ int main()
 
         auto end = std::chrono::high_resolution_clock::now();
         auto elapsed_time = end - start;
-        std::cout << "OpenCV edge detection took " << elapsed_time / std::chrono::milliseconds(1) / 1000.0 << " seconds" << std::endl << std::endl;
+        std::cout << "OpenCV edge detection took " << elapsed_time / std::chrono::milliseconds(1) << " ms" << std::endl << std::endl;
 
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
