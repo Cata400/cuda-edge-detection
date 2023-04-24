@@ -1,2 +1,2 @@
 # cuda-edge-detection
-This repository represents the final project for the Architecture of Information course. It constitues of the implementation and comparison of edge detection algorithms using native C++, OpenCV API and CUDA.
+This repository represents the final project for the Architecture of Information course. It constitues of the implementation and comparison of edge detection algorithms using native C++, OpenCV API and CUDA, in order to analyze and compare their performance, asses the advantages and disadvantages of each method and gain an understanding of how image processing algorithms can be optimized under the hood.
