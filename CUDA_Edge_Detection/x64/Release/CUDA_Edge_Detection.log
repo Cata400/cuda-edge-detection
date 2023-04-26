@@ -2,182 +2,182 @@
   
   D:\Facultate\Master\Sem 2\AI\Proiect\cuda-edge-detection\CUDA_Edge_Detection>"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.6\bin\nvcc.exe" -gencode=arch=compute_52,code=\"sm_52,compute_52\" --use-local-env -ccbin "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.35.32215\bin\HostX64\x64" -x cu   -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.6\include" -I"C:\Users\Catalin\vcpkg\installed\x64-windows\include" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.6\include"     --keep-dir x64\Release  -maxrregcount=0  --machine 64 --compile -cudart static    -DWIN32 -DWIN64 -DNDEBUG -D_CONSOLE -D_MBCS -Xcompiler "/EHsc /W3 /nologo /O2 /Fdx64\Release\vc143.pdb /FS   /MD " -o "D:\Facultate\Master\Sem 2\AI\Proiect\cuda-edge-detection\CUDA_Edge_Detection\x64\Release\kernel.cu.obj" "D:\Facultate\Master\Sem 2\AI\Proiect\cuda-edge-detection\CUDA_Edge_Detection\kernel.cu" 
   device_functions.h is an internal header file and must not be used directly.  This file will be removed in a future CUDA release.  Please use cuda_runtime_api.h or cuda_runtime.h instead.
-D:\Facultate\Master\Sem 2\AI\Proiect\cuda-edge-detection\CUDA_Edge_Detection\kernel.cu(102): warning #546-D: transfer of control bypasses initialization of:
+D:\Facultate\Master\Sem 2\AI\Proiect\cuda-edge-detection\CUDA_Edge_Detection\kernel.cu(106): warning #546-D: transfer of control bypasses initialization of:
               variable "grad_cpu"
-  (113): here
+  (117): here
               variable "grad_norm_cpu"
-  (114): here
+  (118): here
               variable "roi"
-  (235): here
+  (240): here
   
-D:\Facultate\Master\Sem 2\AI\Proiect\cuda-edge-detection\CUDA_Edge_Detection\kernel.cu(119): warning #546-D: transfer of control bypasses initialization of:
+D:\Facultate\Master\Sem 2\AI\Proiect\cuda-edge-detection\CUDA_Edge_Detection\kernel.cu(123): warning #546-D: transfer of control bypasses initialization of:
               variable "roi"
-  (235): here
+  (240): here
   
-D:\Facultate\Master\Sem 2\AI\Proiect\cuda-edge-detection\CUDA_Edge_Detection\kernel.cu(125): warning #546-D: transfer of control bypasses initialization of:
+D:\Facultate\Master\Sem 2\AI\Proiect\cuda-edge-detection\CUDA_Edge_Detection\kernel.cu(129): warning #546-D: transfer of control bypasses initialization of:
               variable "roi"
-  (235): here
+  (240): here
   
-D:\Facultate\Master\Sem 2\AI\Proiect\cuda-edge-detection\CUDA_Edge_Detection\kernel.cu(132): warning #546-D: transfer of control bypasses initialization of:
+D:\Facultate\Master\Sem 2\AI\Proiect\cuda-edge-detection\CUDA_Edge_Detection\kernel.cu(136): warning #546-D: transfer of control bypasses initialization of:
               variable "roi"
-  (235): here
+  (240): here
   
-D:\Facultate\Master\Sem 2\AI\Proiect\cuda-edge-detection\CUDA_Edge_Detection\kernel.cu(145): warning #546-D: transfer of control bypasses initialization of:
+D:\Facultate\Master\Sem 2\AI\Proiect\cuda-edge-detection\CUDA_Edge_Detection\kernel.cu(149): warning #546-D: transfer of control bypasses initialization of:
               variable "roi"
-  (235): here
+  (240): here
   
-D:\Facultate\Master\Sem 2\AI\Proiect\cuda-edge-detection\CUDA_Edge_Detection\kernel.cu(151): warning #546-D: transfer of control bypasses initialization of:
+D:\Facultate\Master\Sem 2\AI\Proiect\cuda-edge-detection\CUDA_Edge_Detection\kernel.cu(155): warning #546-D: transfer of control bypasses initialization of:
               variable "roi"
-  (235): here
+  (240): here
   
-D:\Facultate\Master\Sem 2\AI\Proiect\cuda-edge-detection\CUDA_Edge_Detection\kernel.cu(157): warning #546-D: transfer of control bypasses initialization of:
+D:\Facultate\Master\Sem 2\AI\Proiect\cuda-edge-detection\CUDA_Edge_Detection\kernel.cu(161): warning #546-D: transfer of control bypasses initialization of:
               variable "roi"
-  (235): here
+  (240): here
   
-D:\Facultate\Master\Sem 2\AI\Proiect\cuda-edge-detection\CUDA_Edge_Detection\kernel.cu(163): warning #546-D: transfer of control bypasses initialization of:
+D:\Facultate\Master\Sem 2\AI\Proiect\cuda-edge-detection\CUDA_Edge_Detection\kernel.cu(167): warning #546-D: transfer of control bypasses initialization of:
               variable "roi"
-  (235): here
+  (240): here
   
-D:\Facultate\Master\Sem 2\AI\Proiect\cuda-edge-detection\CUDA_Edge_Detection\kernel.cu(178): warning #546-D: transfer of control bypasses initialization of:
+D:\Facultate\Master\Sem 2\AI\Proiect\cuda-edge-detection\CUDA_Edge_Detection\kernel.cu(182): warning #546-D: transfer of control bypasses initialization of:
               variable "roi"
-  (235): here
+  (240): here
   
-D:\Facultate\Master\Sem 2\AI\Proiect\cuda-edge-detection\CUDA_Edge_Detection\kernel.cu(188): warning #546-D: transfer of control bypasses initialization of:
+D:\Facultate\Master\Sem 2\AI\Proiect\cuda-edge-detection\CUDA_Edge_Detection\kernel.cu(192): warning #546-D: transfer of control bypasses initialization of:
               variable "roi"
-  (235): here
+  (240): here
   
-D:\Facultate\Master\Sem 2\AI\Proiect\cuda-edge-detection\CUDA_Edge_Detection\kernel.cu(203): warning #546-D: transfer of control bypasses initialization of:
+D:\Facultate\Master\Sem 2\AI\Proiect\cuda-edge-detection\CUDA_Edge_Detection\kernel.cu(208): warning #546-D: transfer of control bypasses initialization of:
               variable "roi"
-  (235): here
+  (240): here
   
-D:\Facultate\Master\Sem 2\AI\Proiect\cuda-edge-detection\CUDA_Edge_Detection\kernel.cu(216): warning #546-D: transfer of control bypasses initialization of:
+D:\Facultate\Master\Sem 2\AI\Proiect\cuda-edge-detection\CUDA_Edge_Detection\kernel.cu(221): warning #546-D: transfer of control bypasses initialization of:
               variable "roi"
-  (235): here
+  (240): here
   
-D:\Facultate\Master\Sem 2\AI\Proiect\cuda-edge-detection\CUDA_Edge_Detection\kernel.cu(230): warning #546-D: transfer of control bypasses initialization of:
+D:\Facultate\Master\Sem 2\AI\Proiect\cuda-edge-detection\CUDA_Edge_Detection\kernel.cu(235): warning #546-D: transfer of control bypasses initialization of:
               variable "roi"
-  (235): here
+  (240): here
   
-D:\Facultate\Master\Sem 2\AI\Proiect\cuda-edge-detection\CUDA_Edge_Detection\kernel.cu(269): warning #546-D: transfer of control bypasses initialization of:
+D:\Facultate\Master\Sem 2\AI\Proiect\cuda-edge-detection\CUDA_Edge_Detection\kernel.cu(274): warning #546-D: transfer of control bypasses initialization of:
               variable "roi"
-  (343): here
+  (353): here
   
-D:\Facultate\Master\Sem 2\AI\Proiect\cuda-edge-detection\CUDA_Edge_Detection\kernel.cu(279): warning #546-D: transfer of control bypasses initialization of:
+D:\Facultate\Master\Sem 2\AI\Proiect\cuda-edge-detection\CUDA_Edge_Detection\kernel.cu(284): warning #546-D: transfer of control bypasses initialization of:
               variable "roi"
-  (343): here
+  (353): here
   
-D:\Facultate\Master\Sem 2\AI\Proiect\cuda-edge-detection\CUDA_Edge_Detection\kernel.cu(285): warning #546-D: transfer of control bypasses initialization of:
+D:\Facultate\Master\Sem 2\AI\Proiect\cuda-edge-detection\CUDA_Edge_Detection\kernel.cu(290): warning #546-D: transfer of control bypasses initialization of:
               variable "roi"
-  (343): here
+  (353): here
   
-D:\Facultate\Master\Sem 2\AI\Proiect\cuda-edge-detection\CUDA_Edge_Detection\kernel.cu(292): warning #546-D: transfer of control bypasses initialization of:
+D:\Facultate\Master\Sem 2\AI\Proiect\cuda-edge-detection\CUDA_Edge_Detection\kernel.cu(297): warning #546-D: transfer of control bypasses initialization of:
               variable "roi"
-  (343): here
+  (353): here
   
-D:\Facultate\Master\Sem 2\AI\Proiect\cuda-edge-detection\CUDA_Edge_Detection\kernel.cu(316): warning #546-D: transfer of control bypasses initialization of:
+D:\Facultate\Master\Sem 2\AI\Proiect\cuda-edge-detection\CUDA_Edge_Detection\kernel.cu(326): warning #546-D: transfer of control bypasses initialization of:
               variable "roi"
-  (343): here
+  (353): here
   
-D:\Facultate\Master\Sem 2\AI\Proiect\cuda-edge-detection\CUDA_Edge_Detection\kernel.cu(324): warning #546-D: transfer of control bypasses initialization of:
+D:\Facultate\Master\Sem 2\AI\Proiect\cuda-edge-detection\CUDA_Edge_Detection\kernel.cu(334): warning #546-D: transfer of control bypasses initialization of:
               variable "roi"
-  (343): here
+  (353): here
   
-D:\Facultate\Master\Sem 2\AI\Proiect\cuda-edge-detection\CUDA_Edge_Detection\kernel.cu(338): warning #546-D: transfer of control bypasses initialization of:
+D:\Facultate\Master\Sem 2\AI\Proiect\cuda-edge-detection\CUDA_Edge_Detection\kernel.cu(348): warning #546-D: transfer of control bypasses initialization of:
               variable "roi"
-  (343): here
+  (353): here
   
-D:\Facultate\Master\Sem 2\AI\Proiect\cuda-edge-detection\CUDA_Edge_Detection\kernel.cu(102): warning #546-D: transfer of control bypasses initialization of:
+D:\Facultate\Master\Sem 2\AI\Proiect\cuda-edge-detection\CUDA_Edge_Detection\kernel.cu(106): warning #546-D: transfer of control bypasses initialization of:
               variable "grad_cpu"
-  (113): here
+  (117): here
               variable "grad_norm_cpu"
-  (114): here
+  (118): here
               variable "roi"
-  (235): here
+  (240): here
   
-D:\Facultate\Master\Sem 2\AI\Proiect\cuda-edge-detection\CUDA_Edge_Detection\kernel.cu(119): warning #546-D: transfer of control bypasses initialization of:
+D:\Facultate\Master\Sem 2\AI\Proiect\cuda-edge-detection\CUDA_Edge_Detection\kernel.cu(123): warning #546-D: transfer of control bypasses initialization of:
               variable "roi"
-  (235): here
+  (240): here
   
-D:\Facultate\Master\Sem 2\AI\Proiect\cuda-edge-detection\CUDA_Edge_Detection\kernel.cu(125): warning #546-D: transfer of control bypasses initialization of:
+D:\Facultate\Master\Sem 2\AI\Proiect\cuda-edge-detection\CUDA_Edge_Detection\kernel.cu(129): warning #546-D: transfer of control bypasses initialization of:
               variable "roi"
-  (235): here
+  (240): here
   
-D:\Facultate\Master\Sem 2\AI\Proiect\cuda-edge-detection\CUDA_Edge_Detection\kernel.cu(132): warning #546-D: transfer of control bypasses initialization of:
+D:\Facultate\Master\Sem 2\AI\Proiect\cuda-edge-detection\CUDA_Edge_Detection\kernel.cu(136): warning #546-D: transfer of control bypasses initialization of:
               variable "roi"
-  (235): here
+  (240): here
   
-D:\Facultate\Master\Sem 2\AI\Proiect\cuda-edge-detection\CUDA_Edge_Detection\kernel.cu(145): warning #546-D: transfer of control bypasses initialization of:
+D:\Facultate\Master\Sem 2\AI\Proiect\cuda-edge-detection\CUDA_Edge_Detection\kernel.cu(149): warning #546-D: transfer of control bypasses initialization of:
               variable "roi"
-  (235): here
+  (240): here
   
-D:\Facultate\Master\Sem 2\AI\Proiect\cuda-edge-detection\CUDA_Edge_Detection\kernel.cu(151): warning #546-D: transfer of control bypasses initialization of:
+D:\Facultate\Master\Sem 2\AI\Proiect\cuda-edge-detection\CUDA_Edge_Detection\kernel.cu(155): warning #546-D: transfer of control bypasses initialization of:
               variable "roi"
-  (235): here
+  (240): here
   
-D:\Facultate\Master\Sem 2\AI\Proiect\cuda-edge-detection\CUDA_Edge_Detection\kernel.cu(157): warning #546-D: transfer of control bypasses initialization of:
+D:\Facultate\Master\Sem 2\AI\Proiect\cuda-edge-detection\CUDA_Edge_Detection\kernel.cu(161): warning #546-D: transfer of control bypasses initialization of:
               variable "roi"
-  (235): here
+  (240): here
   
-D:\Facultate\Master\Sem 2\AI\Proiect\cuda-edge-detection\CUDA_Edge_Detection\kernel.cu(163): warning #546-D: transfer of control bypasses initialization of:
+D:\Facultate\Master\Sem 2\AI\Proiect\cuda-edge-detection\CUDA_Edge_Detection\kernel.cu(167): warning #546-D: transfer of control bypasses initialization of:
               variable "roi"
-  (235): here
+  (240): here
   
-D:\Facultate\Master\Sem 2\AI\Proiect\cuda-edge-detection\CUDA_Edge_Detection\kernel.cu(178): warning #546-D: transfer of control bypasses initialization of:
+D:\Facultate\Master\Sem 2\AI\Proiect\cuda-edge-detection\CUDA_Edge_Detection\kernel.cu(182): warning #546-D: transfer of control bypasses initialization of:
               variable "roi"
-  (235): here
+  (240): here
   
-D:\Facultate\Master\Sem 2\AI\Proiect\cuda-edge-detection\CUDA_Edge_Detection\kernel.cu(188): warning #546-D: transfer of control bypasses initialization of:
+D:\Facultate\Master\Sem 2\AI\Proiect\cuda-edge-detection\CUDA_Edge_Detection\kernel.cu(192): warning #546-D: transfer of control bypasses initialization of:
               variable "roi"
-  (235): here
+  (240): here
   
-D:\Facultate\Master\Sem 2\AI\Proiect\cuda-edge-detection\CUDA_Edge_Detection\kernel.cu(203): warning #546-D: transfer of control bypasses initialization of:
+D:\Facultate\Master\Sem 2\AI\Proiect\cuda-edge-detection\CUDA_Edge_Detection\kernel.cu(208): warning #546-D: transfer of control bypasses initialization of:
               variable "roi"
-  (235): here
+  (240): here
   
-D:\Facultate\Master\Sem 2\AI\Proiect\cuda-edge-detection\CUDA_Edge_Detection\kernel.cu(216): warning #546-D: transfer of control bypasses initialization of:
+D:\Facultate\Master\Sem 2\AI\Proiect\cuda-edge-detection\CUDA_Edge_Detection\kernel.cu(221): warning #546-D: transfer of control bypasses initialization of:
               variable "roi"
-  (235): here
+  (240): here
   
-D:\Facultate\Master\Sem 2\AI\Proiect\cuda-edge-detection\CUDA_Edge_Detection\kernel.cu(230): warning #546-D: transfer of control bypasses initialization of:
+D:\Facultate\Master\Sem 2\AI\Proiect\cuda-edge-detection\CUDA_Edge_Detection\kernel.cu(235): warning #546-D: transfer of control bypasses initialization of:
               variable "roi"
-  (235): here
+  (240): here
   
-D:\Facultate\Master\Sem 2\AI\Proiect\cuda-edge-detection\CUDA_Edge_Detection\kernel.cu(269): warning #546-D: transfer of control bypasses initialization of:
+D:\Facultate\Master\Sem 2\AI\Proiect\cuda-edge-detection\CUDA_Edge_Detection\kernel.cu(274): warning #546-D: transfer of control bypasses initialization of:
               variable "roi"
-  (343): here
+  (353): here
   
-D:\Facultate\Master\Sem 2\AI\Proiect\cuda-edge-detection\CUDA_Edge_Detection\kernel.cu(279): warning #546-D: transfer of control bypasses initialization of:
+D:\Facultate\Master\Sem 2\AI\Proiect\cuda-edge-detection\CUDA_Edge_Detection\kernel.cu(284): warning #546-D: transfer of control bypasses initialization of:
               variable "roi"
-  (343): here
+  (353): here
   
-D:\Facultate\Master\Sem 2\AI\Proiect\cuda-edge-detection\CUDA_Edge_Detection\kernel.cu(285): warning #546-D: transfer of control bypasses initialization of:
+D:\Facultate\Master\Sem 2\AI\Proiect\cuda-edge-detection\CUDA_Edge_Detection\kernel.cu(290): warning #546-D: transfer of control bypasses initialization of:
               variable "roi"
-  (343): here
+  (353): here
   
-D:\Facultate\Master\Sem 2\AI\Proiect\cuda-edge-detection\CUDA_Edge_Detection\kernel.cu(292): warning #546-D: transfer of control bypasses initialization of:
+D:\Facultate\Master\Sem 2\AI\Proiect\cuda-edge-detection\CUDA_Edge_Detection\kernel.cu(297): warning #546-D: transfer of control bypasses initialization of:
               variable "roi"
-  (343): here
+  (353): here
   
-D:\Facultate\Master\Sem 2\AI\Proiect\cuda-edge-detection\CUDA_Edge_Detection\kernel.cu(316): warning #546-D: transfer of control bypasses initialization of:
+D:\Facultate\Master\Sem 2\AI\Proiect\cuda-edge-detection\CUDA_Edge_Detection\kernel.cu(326): warning #546-D: transfer of control bypasses initialization of:
               variable "roi"
-  (343): here
+  (353): here
   
-D:\Facultate\Master\Sem 2\AI\Proiect\cuda-edge-detection\CUDA_Edge_Detection\kernel.cu(324): warning #546-D: transfer of control bypasses initialization of:
+D:\Facultate\Master\Sem 2\AI\Proiect\cuda-edge-detection\CUDA_Edge_Detection\kernel.cu(334): warning #546-D: transfer of control bypasses initialization of:
               variable "roi"
-  (343): here
+  (353): here
   
-D:\Facultate\Master\Sem 2\AI\Proiect\cuda-edge-detection\CUDA_Edge_Detection\kernel.cu(338): warning #546-D: transfer of control bypasses initialization of:
+D:\Facultate\Master\Sem 2\AI\Proiect\cuda-edge-detection\CUDA_Edge_Detection\kernel.cu(348): warning #546-D: transfer of control bypasses initialization of:
               variable "roi"
-  (343): here
+  (353): here
   
   kernel.cu
   device_functions.h is an internal header file and must not be used directly.  This file will be removed in a future CUDA release.  Please use cuda_runtime_api.h or cuda_runtime.h instead.
-D:\Facultate\Master\Sem 2\AI\Proiect\cuda-edge-detection\CUDA_Edge_Detection\kernel.cu(235): warning C4533: initialization of 'roi' is skipped by 'goto Error_canny'
-  D:\Facultate\Master\Sem 2\AI\Proiect\cuda-edge-detection\CUDA_Edge_Detection\kernel.cu(235): note: see declaration of 'roi'
-  D:\Facultate\Master\Sem 2\AI\Proiect\cuda-edge-detection\CUDA_Edge_Detection\kernel.cu(253): note: see declaration of 'Error_canny'
-D:\Facultate\Master\Sem 2\AI\Proiect\cuda-edge-detection\CUDA_Edge_Detection\kernel.cu(343): warning C4533: initialization of 'roi' is skipped by 'goto Error_sobel'
-  D:\Facultate\Master\Sem 2\AI\Proiect\cuda-edge-detection\CUDA_Edge_Detection\kernel.cu(343): note: see declaration of 'roi'
-  D:\Facultate\Master\Sem 2\AI\Proiect\cuda-edge-detection\CUDA_Edge_Detection\kernel.cu(361): note: see declaration of 'Error_sobel'
+D:\Facultate\Master\Sem 2\AI\Proiect\cuda-edge-detection\CUDA_Edge_Detection\kernel.cu(240): warning C4533: initialization of 'roi' is skipped by 'goto Error_canny'
+  D:\Facultate\Master\Sem 2\AI\Proiect\cuda-edge-detection\CUDA_Edge_Detection\kernel.cu(240): note: see declaration of 'roi'
+  D:\Facultate\Master\Sem 2\AI\Proiect\cuda-edge-detection\CUDA_Edge_Detection\kernel.cu(258): note: see declaration of 'Error_canny'
+D:\Facultate\Master\Sem 2\AI\Proiect\cuda-edge-detection\CUDA_Edge_Detection\kernel.cu(353): warning C4533: initialization of 'roi' is skipped by 'goto Error_sobel'
+  D:\Facultate\Master\Sem 2\AI\Proiect\cuda-edge-detection\CUDA_Edge_Detection\kernel.cu(353): note: see declaration of 'roi'
+  D:\Facultate\Master\Sem 2\AI\Proiect\cuda-edge-detection\CUDA_Edge_Detection\kernel.cu(371): note: see declaration of 'Error_sobel'
      Creating library D:\Facultate\Master\Sem 2\AI\Proiect\cuda-edge-detection\CUDA_Edge_Detection\x64\Release\CUDA_Edge_Detection.lib and object D:\Facultate\Master\Sem 2\AI\Proiect\cuda-edge-detection\CUDA_Edge_Detection\x64\Release\CUDA_Edge_Detection.exp
   LINK : /LTCG specified but no code generation required; remove /LTCG from the link command line to improve linker performance
   CUDA_Edge_Detection.vcxproj -> D:\Facultate\Master\Sem 2\AI\Proiect\cuda-edge-detection\CUDA_Edge_Detection\x64\Release\CUDA_Edge_Detection.exe

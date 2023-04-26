@@ -22,7 +22,7 @@ __constant__ float gy[3][3] = { { 1, 2, 1 },  { 0, 0, 0 }, { -1, -2, -1 } };
 __global__ void sobel_pixel(uchar* input, float* output, int height, int width, bool small);
 
 // Calculate the sobel filter output for every pixel in a 32 x 32 region
-__global__ void sobel_region(uchar * input, float* output, int height, int width);
+__global__ void sobel_region(uchar* input, float* output, int height, int width, const int block_x, const int block_y);
 
 // Calculate the sobel filter output for every pixel in a 32 x 32 region
 __global__ void sobel_region_shared(uchar* input, float* output, int height, int width, const int block_x, const int block_y);
@@ -38,8 +38,9 @@ __global__ void canny_pixel_2(uchar* grad_norm, float* orientations, uchar* grad
 int main() {
     // Parameters
     bool canny = true;
-    int reps = 20;
+    int reps = 50;
     bool region = false;
+    bool shared = true;
     std::string image_name, image_path, save_path_cuda;
     image_name = "Lenna_multiplied_4x4";
 
@@ -74,7 +75,10 @@ int main() {
     int block_size_y = 8;
     dim3 block_size(block_size_x, block_size_y);
 
-    dim3 region_size(32, 32);
+    int region_size_x = (height + 32 - 1) / 32;
+    int region_size_y = (width + 32 - 1) / 32;
+
+    dim3 region_size(region_size_x, region_size_y);
 
     int grid_size_x = (height + block_size_x - 1) / block_size_x;
     int grid_size_y = (width + block_size_y - 1) / block_size_y;
@@ -196,6 +200,7 @@ int main() {
                 canny_pixel_2 <<< grid_size, block_size >> > (grad_norm, orientations, grad_suppressed, image_edges_cuda, height, width, 40, 120, false);
             }
 
+
             // Check for any errors launching the kernel
             cudaStatus = cudaGetLastError();
             if (cudaStatus != cudaSuccess) {
@@ -300,7 +305,12 @@ int main() {
 
         for (int i = 0; i < reps; i++) {
             if (region) {
-                sobel_region <<< 1, region_size >>> (image_data_cuda, image_edges_cuda, height, width);
+                if (shared) {
+                    sobel_region_shared <<< region_size, 1 >>> (image_data_cuda, image_edges_cuda, height, width, region_size_x, region_size_y);
+                }
+                else {
+                    sobel_region <<< region_size, 1 >>> (image_data_cuda, image_edges_cuda, height, width, region_size_x, region_size_y);
+                }
             }
             else if (width <= 1024) {
                 sobel_pixel <<< height, width >>> (image_data_cuda, image_edges_cuda, height, width, true);
@@ -396,11 +406,11 @@ __global__ void sobel_pixel(uchar* input, float* output, int height, int width, 
     }
 }
 
-__global__ void sobel_region(uchar* input, float* output, int height, int width) {
-    int x_begin = threadIdx.x * 32;
-    int y_begin = threadIdx.y * 32;
-    int x_end = x_begin + 32;
-    int y_end = y_begin + 32;
+__global__ void sobel_region(uchar* input, float* output, int height, int width, const int block_x, const int block_y) {
+    int x_begin = blockIdx.x * block_x;
+    int y_begin = blockIdx.y * block_y;
+    int x_end = x_begin + block_x;
+    int y_end = y_begin + block_y;
 
     for (int i = x_begin; i < x_end; i++) {
         for (int j = y_begin; j < y_end; j++) {
@@ -440,9 +450,9 @@ __global__ void sobel_region_shared(uchar* input, float* output, int height, int
     x_end += 1;
     y_begin -= 1;
     y_end += 1;
-    __shared__ uchar input_copy[34][34];
-    for (int i = 0; i < 34; i++) {
-        for (int j = 0; j < 34; j++) {
+    __shared__ uchar input_copy[100][100];
+    for (int i = 0; i < block_x + 2; i++) {
+        for (int j = 0; j < block_y + 2; j++) {
             if ((i + x_begin >= 0) && (i + x_begin < height) && (j + y_begin >= 0) && (j + y_begin < width)) {
                 input_copy[i][j] = input[(i + x_begin) * width + (j + y_begin)];
             }
